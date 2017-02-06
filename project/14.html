@@ -1,0 +1,52 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script> 
+	<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        var myApp = angular.module('myApp', ['ui.router']);
+        // For Component users, it should look like this: 
+        // var myApp = angular.module('myApp', [require('angular-ui-router')]); 
+		myApp.config(function($stateProvider,$urlRouterProvider){
+			$urlRouterProvider.otherwise("/route1")
+				 $stateProvider
+				 .state('route1',{
+					url:'/route1',
+					templateUrl:"route1.html"
+				 })
+				 .state("route1.list",{
+					url:"/route1",
+					templateUrl:'route1.html',
+					controller:function($scope){
+						$scope.items=['A','B','C','D'];
+					}
+				 })
+				 .state('route2',{
+					url:'/route2',
+					templateUrl:'route2.html',
+					controller:function($scope){
+						$scope.things=['A','B','C','D'];
+					}
+				 })
+		});
+    </script> 
+    ...
+</head>
+<body class="container">
+    <nav class="navbar">
+		<div class="navbar-inner">
+			<a href="#" class="brand">Quick start</a>
+			<ul class="nav">
+				<li><a ui-sref='route1'>Route 1</a></li>
+				<li><a ui-sref='route2'>Route 2</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="row">
+		<div class="span12">
+			<div class="well" ui-view></div>
+		</div>
+	</div>
+</body>
+</html>.
